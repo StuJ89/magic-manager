@@ -1,0 +1,19 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.input {
+    font-family: inherit;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: var(--border-radius);
+}
+
+.label {
+    font-size: 22px;
+    color: var(--primary-color);
+}

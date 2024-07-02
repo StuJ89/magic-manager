@@ -1,0 +1,34 @@
+.root {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    user-select: none;
+}
+
+.header {
+    padding: 10px 0px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.backButton {
+    justify-self: end;
+    color: var(--primary-color);
+    height: 28px;
+    width: 28px;
+    cursor: pointer;
+}
+
+.homeButton {
+    justify-self: start;
+    color: var(--primary-color);
+    height: 28px;
+    width: 28px;
+    cursor: pointer;
+}

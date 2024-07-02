@@ -1,0 +1,31 @@
+.root {
+    background: linear-gradient(to bottom left, var(--secondary-color), var(--secondary-color-lighter));
+    border: 5px solid black;
+    padding: 24px 32px;
+    border-radius: var(--border-radius);
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button {
+    font-size: 18px;
+    font-family: inherit;
+    padding: 8px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--primary-color);
+    color: var(--text-color-primary);
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: var(--primary-color-lighter);
+}

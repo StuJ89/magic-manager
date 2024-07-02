@@ -1,0 +1,54 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.label {
+    font-size: 22px;
+    color: var(--primary-color);
+}
+
+.inputContainer {
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.input {
+    font-family: inherit;
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: var(--border-radius);
+}
+
+.button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    position: absolute;
+    width: 40px;
+    right: 0;
+    height: 100%;
+}
+
+.button:hover {
+    color: var(--primary-color);
+}
+
+.valueContainer {
+    margin: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+.value {
+    font-size: 18px;
+    color: var(--primary-color);
+    padding: 5px;
+    border-radius: var(--border-radius);
+}
