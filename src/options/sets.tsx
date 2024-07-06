@@ -1,5 +1,9 @@
 export const setOptions = [
     {
+        name: 'Conspiracy',
+        value: 'CNS'
+    },
+    {
         name: 'Duel Decks: Elspeth vs. Tezzeret',
         value: 'DDF'
     },

@@ -6,6 +6,12 @@ export const cardMenuOptions = [
         type: 'black'
     },
     {
+        name: 'Add to Collection',
+        link: '/cards/add-to-collection',
+        icon: 'add',
+        type: 'blue'
+    },
+    {
         name: 'View Collection',
         link: '/cards/collection',
         icon: 'view',

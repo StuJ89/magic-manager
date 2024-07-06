@@ -31,7 +31,7 @@ export async function createDeck(data: WithoutId<Deck>): Promise<{ success: bool
 
 export async function readDecksCollection(): Promise<Deck[]> {
     const collection = await getDatabaseCollection<Deck>('decks');
-    const documents = await collection.find().toArray();
+    const documents = await collection.find().sort({ name: 'asc' }).toArray();
 
     documents.forEach((document) => {
         document._id = document._id.toString();

@@ -20,15 +20,27 @@
 .backButton {
     justify-self: end;
     color: var(--primary-color);
-    height: 28px;
-    width: 28px;
+    height: 38px;
+    width: 38px;
     cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.backButton:hover {
+    transform: scale(1.1);
+    color: var(--primary-color-lighter);
 }
 
 .homeButton {
     justify-self: start;
     color: var(--primary-color);
-    height: 28px;
-    width: 28px;
+    height: 38px;
+    width: 38px;
     cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.homeButton:hover {
+    transform: scale(1.1);
+    color: var(--primary-color-lighter);
 }

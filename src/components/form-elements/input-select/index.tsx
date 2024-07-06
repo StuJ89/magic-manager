@@ -15,7 +15,7 @@ export function SelectInput(props: SelectInputProps) {
             <label className={css.label} htmlFor={props.name}>
                 {props.label}
             </label>
-            <select name={props.name} id={props.name}>
+            <select className={css.input} name={props.name} id={props.name}>
                 {props.options.map((option) => (
                     <option key={option.value} value={option.value}>
                         {option.name}

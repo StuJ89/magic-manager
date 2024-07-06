@@ -8,7 +8,10 @@ import { TextInput } from 'app/components/form-elements/input-text';
 import { createCard } from 'app/server/actions/database/cards';
 
 import { colourOptions } from 'app/options/colours';
+import { setOptions } from 'app/options/sets';
 import { SelectInput } from 'app/components/form-elements/input-select';
+import { rarityOptions } from 'app/options/rarities';
+import { cardTypeOptions } from 'app/options/card-types';
 
 export function AddCardForm() {
     async function handleSubmit(formData: FormData) {
@@ -16,7 +19,7 @@ export function AddCardForm() {
         const colours = formData.getAll('colours') as string[];
         const manaCost = formData.getAll('manaCost') as string[];
         const convertedManaCost = formData.get('convertedManaCost') as string;
-        const cardType = formData.getAll('cardType') as string[];
+        const cardType = formData.get('cardType') as string;
         const subTypes = formData.getAll('subTypes') as string[];
         const set = formData.get('set') as string;
         const rarity = formData.get('rarity') as string;
@@ -31,7 +34,7 @@ export function AddCardForm() {
             colours,
             manaCost,
             convertedManaCost: parseInt(convertedManaCost),
-            cardType,
+            cardType: cardType.split(','),
             subTypes,
             set,
             rarity,
@@ -42,11 +45,11 @@ export function AddCardForm() {
             image: image ?? null
         });
 
+        console.log(result);
+
         if (!result) {
             return;
         }
-
-        console.log(result);
     }
 
     return (
@@ -55,10 +58,14 @@ export function AddCardForm() {
             <MultiSelectInput name='colours' label='Colours' options={colourOptions} />
             <TextInput name='manaCost' label='Mana Cost' />
             <TextInput name='convertedManaCost' label='Converted Mana Cost' />
-            <MultiTextInput name='cardType' label='Card Type' />
+            <MultiSelectInput name='cardType' label='Card Type' options={cardTypeOptions} />
             <MultiTextInput name='subTypes' label='Sub Types' />
-            <SelectInput name='set' label='Set' options={[]} />
+            <SelectInput name='set' label='Set' options={setOptions} />
+            <SelectInput name='rarity' label='Rarity' options={rarityOptions} />
+            <TextInput name='rulesText' label='Rules Text' />
             <MultiTextInput name='keywords' label='Keywords' />
+            <TextInput name='power' label='Power' />
+            <TextInput name='toughness' label='Toughness' />
         </Form>
     );
 }

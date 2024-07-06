@@ -34,6 +34,7 @@ type CollectionCard = {
 
 type Set = {
     name: string; // Murders at Karlov Manor
+    code: string; // MKM
     dateReleased: Date; // unix timestamp
     setSymbols: object: // { 'common': url, 'uncommon': url, 'rare': url, 'mythic': url }
 };
