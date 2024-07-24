@@ -3,8 +3,8 @@ html {
     --background-color-lighter: #303030;
     --primary-color: #ff6600;
     --primary-color-lighter: #f57d2d;
-    --secondary-color: #404040;
-    --secondary-color-lighter: #505050;
+    --secondary-color: #353535;
+    --secondary-color-lighter: #404040;
     --border-radius: 5px;
     --text-color-primary: #ffffff;
     --white: rgb(163, 125, 12);
@@ -39,4 +39,5 @@ p {
 
 h1 {
     font-size: 36px;
+    text-shadow: 0px 2px 1px #ff660010, 1px 3px 2px #ff660020;
 }

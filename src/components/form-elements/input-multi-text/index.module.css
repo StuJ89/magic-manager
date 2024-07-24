@@ -22,7 +22,7 @@
     border: none;
     outline: none;
     font-size: 18px;
-    padding: 8px;
+    padding: 8px 8px 12px 12px;
     border-radius: var(--border-radius);
 }
 
@@ -41,16 +41,26 @@
 }
 
 .valueContainer {
-    margin: 5px;
+    margin: 10px 30px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5px;
+    gap: 10px 30px;
 }
 
 .value {
-    font-size: 22px;
-    color: var(--primary-color);
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-    padding: 5px;
+    background-color: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 18px;
+    padding: 3px 10px;
     border-radius: var(--border-radius);
+}
+
+.remove {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }

@@ -14,5 +14,9 @@ export const setOptions = [
     {
         name: 'Murders at Karlov Manor',
         value: 'MKM'
+    },
+    {
+        name: 'Zendikar',
+        value: 'ZEN'
     }
 ];

@@ -1,0 +1,17 @@
+.root {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    padding: 30px;
+    justify-items: center;
+}
+
+.image {
+    border-radius: 20px;
+}
+
+.formContainer {
+    width: 100%;
+    margin: auto 0;
+    padding: 30px;
+}

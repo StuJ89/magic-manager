@@ -1,0 +1,55 @@
+.root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog {
+    width: 70vw;
+    height: 70vh;
+    background-color: var(--background-color-lighter);
+    border-radius: var(--border-radius);
+}
+
+.header {
+    padding: 0px 12px;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+}
+
+.title {
+    padding-left: 8px;
+    font-size: 26px;
+}
+
+.icon {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+
+    &:hover {
+        color: var(--primary-color);
+    }
+}
+
+.childContainer {
+    width: 100%;
+    height: calc(100% - 50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

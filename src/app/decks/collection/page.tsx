@@ -1,9 +1,10 @@
 'use client';
 
-import { Table } from 'app/components/table';
-import PageLayout from 'app/layouts/page';
-import { Deck, readDecksCollection } from 'app/server/actions/database/decks';
 import { useEffect, useState } from 'react';
+
+import { Table } from 'app/components/table';
+import { Deck, readDecksCollection } from 'app/server/actions/database/decks';
+import PageLayout from 'app/layouts/page';
 
 export default function Page() {
     const [decks, setDecks] = useState<Deck[] | null>(null);

@@ -27,6 +27,10 @@ export function MultiTextInput(props: InputMultiTextProps) {
         setInputValue('');
     }, [inputValue, values]);
 
+    const handleRemoveValue = (selectedValue: string) => {
+        setValues(values.filter((value) => value !== selectedValue));
+    };
+
     useEffect(() => {
         const enterKeypress = (event: KeyboardEvent) => {
             if (event.key === 'Enter') {
@@ -39,9 +43,28 @@ export function MultiTextInput(props: InputMultiTextProps) {
         return () => document.removeEventListener('keydown', enterKeypress);
     }, [handleAddValue, values]);
 
+    const renderValueContainer = () => {
+        if (values.length === 0) {
+            return null;
+        }
+
+        return (
+            <div className={css.valueContainer}>
+                {values.map((value) => (
+                    <div className={css.value} key={value}>
+                        {value}
+                        <button className={css.remove} onClick={() => handleRemoveValue(value)}>
+                            X
+                        </button>
+                    </div>
+                ))}
+            </div>
+        );
+    };
+
     return (
         <div className={css.root}>
-            <label className={css.label} htmlFor={'multi-text-input'}>
+            <label className={css.label} htmlFor={`${props.name}-multi-text-input`}>
                 {props.label}
             </label>
             <div className={css.inputContainer}>
@@ -49,7 +72,7 @@ export function MultiTextInput(props: InputMultiTextProps) {
                     className={css.input}
                     type='text'
                     name={'multi-text-input'}
-                    id={'multi-text-input'}
+                    id={`${props.name}-multi-text-input`}
                     placeholder={props.placeholder}
                     value={inputValue}
                     autoComplete='off'
@@ -60,13 +83,7 @@ export function MultiTextInput(props: InputMultiTextProps) {
                 </button>
             </div>
             <input type='hidden' name={props.name} id={props.name} value={values.join(',')} />
-            <div className={css.valueContainer}>
-                {values.map((value) => (
-                    <div className={css.value} key={value}>
-                        {value}
-                    </div>
-                ))}
-            </div>
+            {renderValueContainer()}
         </div>
     );
 }

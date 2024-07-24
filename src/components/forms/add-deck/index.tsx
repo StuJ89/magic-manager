@@ -29,7 +29,7 @@ export function AddDeckForm() {
     }
 
     return (
-        <Form submitAction={handleSubmit} buttonLabel='Add Deck'>
+        <Form submitAction={handleSubmit} buttonLabel='Create Deck' fixedWidth>
             <TextInput name='name' label='Name' />
             <MultiSelectInput name='colours' label='Colours' options={colourOptions} />
             <MultiTextInput name='keywords' label='Keywords' />

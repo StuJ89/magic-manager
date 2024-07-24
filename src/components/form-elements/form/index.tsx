@@ -6,8 +6,9 @@ import css from './index.module.css';
 
 type FormProps = {
     children: ReactNode;
-    submitAction: (formData: FormData) => void;
     buttonLabel?: string;
+    fixedWidth?: boolean;
+    submitAction: (formData: FormData) => void;
 };
 
 export function Form(props: FormProps) {
@@ -16,8 +17,16 @@ export function Form(props: FormProps) {
         props.submitAction(new FormData(event.target as HTMLFormElement));
     };
 
+    const determineFormClassName = () => {
+        if (props.fixedWidth === true) {
+            return `${css.root} ${css.formFixedWidth}`;
+        }
+
+        return css.root;
+    };
+
     return (
-        <form className={css.root} onSubmit={handleSubmit}>
+        <form className={determineFormClassName()} onSubmit={handleSubmit}>
             {props.children}
             <div className={css.footer}>
                 <button className={css.button} type='submit'>

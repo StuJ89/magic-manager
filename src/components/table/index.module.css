@@ -14,7 +14,7 @@
 }
 
 .header {
-    padding: 8px 24px;
+    padding: 8px 24px 12px 24px;
     text-transform: capitalize;
     text-align: left;
     font-size: 22px;
@@ -22,25 +22,56 @@
 }
 
 .row {
-    background-color: var(--background-color-lighter);
+    background: var(--secondary-color);
+    border-bottom: 1px solid var(--secondary-color-lighter);
+
+    &:first-child {
+        border-top: 1px solid var(--secondary-color-lighter);
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &:last-child > :first-child {
+        border-bottom-left-radius: var(--border-radius);
+    }
+
+    &:last-child > :last-child {
+        border-bottom-right-radius: var(--border-radius);
+    }
 }
 
 .row:hover {
-    background-color: var(--primary-color-lighter);
+    background-color: var(--secondary-color-lighter);
     cursor: pointer;
 }
 
 .cell {
-    padding: 8px 24px;
+    max-width: 300px;
+    text-transform: capitalize;
+    padding: 8px 24px 12px 24px;
     text-align: left;
     font-size: 18px;
 }
 
 .manaContainer {
-    padding: 12px 24px;
     display: flex;
     flex-direction: row;
-    gap: 4px;
+    gap: 3px;
+}
+
+.manaNumber {
+    margin-top: 2px;
+    color: black;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    background-color: rgb(171, 163, 163);
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .manaSymbol {

@@ -17,10 +17,10 @@ export function AddCardForm() {
     async function handleSubmit(formData: FormData) {
         const name = formData.get('name') as string;
         const colours = formData.getAll('colours') as string[];
-        const manaCost = formData.getAll('manaCost') as string[];
+        const manaCost = formData.get('manaCost') as string;
         const convertedManaCost = formData.get('convertedManaCost') as string;
         const cardType = formData.get('cardType') as string;
-        const subTypes = formData.getAll('subTypes') as string[];
+        const subTypes = formData.get('subTypes') as string;
         const set = formData.get('set') as string;
         const rarity = formData.get('rarity') as string;
         const rulesText = formData.get('rulesText') as string;
@@ -29,23 +29,29 @@ export function AddCardForm() {
         const toughness = formData.get('toughness') as string;
         const image = formData.get('image') as string;
 
+        const formatArray = (value: string): string[] => {
+            if (!value) {
+                return [];
+            }
+
+            return value.split(',');
+        };
+
         const result = await createCard({
             name,
             colours,
             manaCost,
             convertedManaCost: parseInt(convertedManaCost),
-            cardType: cardType.split(','),
-            subTypes,
+            cardType: formatArray(cardType),
+            subTypes: formatArray(subTypes),
             set,
             rarity,
             rulesText,
-            keyWords: keywords.split(','),
+            keywords: formatArray(keywords),
             power: parseInt(power) ?? null,
             toughness: parseInt(toughness) ?? null,
             image: image ?? null
         });
-
-        console.log(result);
 
         if (!result) {
             return;
@@ -53,10 +59,10 @@ export function AddCardForm() {
     }
 
     return (
-        <Form submitAction={handleSubmit}>
+        <Form submitAction={handleSubmit} fixedWidth>
             <TextInput name='name' label='Name' />
             <MultiSelectInput name='colours' label='Colours' options={colourOptions} />
-            <TextInput name='manaCost' label='Mana Cost' />
+            <TextInput name='manaCost' label='Mana Cost (e.g. 2WU)' />
             <TextInput name='convertedManaCost' label='Converted Mana Cost' />
             <MultiSelectInput name='cardType' label='Card Type' options={cardTypeOptions} />
             <MultiTextInput name='subTypes' label='Sub Types' />
@@ -66,6 +72,7 @@ export function AddCardForm() {
             <MultiTextInput name='keywords' label='Keywords' />
             <TextInput name='power' label='Power' />
             <TextInput name='toughness' label='Toughness' />
+            <TextInput name='image' label='Image URL' />
         </Form>
     );
 }

@@ -18,17 +18,18 @@ type Card = {
     keyWords: string[]; // ['Double Strike', 'Equipped']
     power?: number; // 1
     toughness?: number; // 1
+    price?: object; // { standard: 0.20, foil: 0.40 }
     image: string; // url?
 };
 
 type Collection = {
     user: string; // User ID
+    name: string; // Stu's Cards
 }
 
 type CollectionCard = {
     collection: string; // Collection ID
     quantity: object; // { standard: 4, foil: 1, surge: 0 }
-    price: object; // { standard: 0.20, foil: 0.40; surge: null }
 
 }
 

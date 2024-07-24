@@ -1,32 +1,41 @@
 'use server';
 
 import { getDatabaseCollection } from 'app/server/database';
-import { ObjectId } from 'mongodb';
+import { ObjectId, WithoutId } from 'mongodb';
 
 export type Card = {
+    _id: string;
     name: string;
     colours: string[];
-    manaCost: string[];
+    manaCost: string;
     convertedManaCost: number;
     cardType: string[];
     subTypes: string[];
     set: string;
     rarity: string;
     rulesText: string;
-    keyWords: string[];
+    keywords: string[];
     power: number | null;
     toughness: number | null;
     image: string | null;
 };
 
-export async function createCard(data: Card): Promise<Card | null> {
+export async function createCard(data: WithoutId<Card>): Promise<{ success: boolean }> {
     const collection = await getDatabaseCollection<Card>('cards');
-    const document = await collection.insertOne(data);
+    const document = await collection.insertOne(data as Card);
     const result = await collection.findOne({
         _id: document.insertedId
     });
 
-    return result;
+    if (!result) {
+        return {
+            success: false
+        };
+    }
+
+    return {
+        success: true
+    };
 }
 
 export async function readCard(id: string): Promise<Card | null> {
@@ -38,7 +47,11 @@ export async function readCard(id: string): Promise<Card | null> {
 
 export async function readCardCollection(): Promise<Card[]> {
     const collection = await getDatabaseCollection<Card>('cards');
-    const documents = await collection.find().toArray();
+    const documents = await collection.find().sort({ name: 'asc' }).toArray();
+
+    documents.forEach((document) => {
+        document._id = document._id.toString();
+    });
 
     return documents;
 }

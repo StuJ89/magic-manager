@@ -1,7 +1,7 @@
 'use server';
 
 import { getDatabaseCollection } from 'app/server/database';
-import { WithId, WithoutId } from 'mongodb';
+import { WithoutId } from 'mongodb';
 
 export type Deck = {
     _id: string;
