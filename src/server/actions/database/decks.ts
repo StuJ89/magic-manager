@@ -39,3 +39,16 @@ export async function readDecksCollection(): Promise<Deck[]> {
 
     return documents;
 }
+
+export async function readDeck(id: string): Promise<Deck | null> {
+    const collection = await getDatabaseCollection<Deck>('decks');
+    const document = await collection.findOne({ _id: id });
+
+    if (!document) {
+        return null;
+    }
+
+    document._id = document._id.toString();
+
+    return document;
+}

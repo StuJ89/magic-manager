@@ -42,7 +42,7 @@
     }
 }
 
-.row:hover {
+.rowOnClick:hover {
     background-color: var(--secondary-color-lighter);
     cursor: pointer;
 }

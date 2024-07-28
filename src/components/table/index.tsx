@@ -30,7 +30,10 @@ export function Table(props: TableProps) {
 
         const tableData = props.data.map((row: TableData) => {
             return (
-                <tr key={row._id as string} className={css.row} onClick={() => props.onClick?.(row._id as string)}>
+                <tr
+                    key={row._id as string}
+                    className={props.onClick ? `${css.row} ${css.rowOnClick}` : css.row}
+                    onClick={() => props.onClick?.(row._id as string)}>
                     {props.columns.map((column: string) => {
                         if (column === 'colours') {
                             return (
@@ -138,6 +141,17 @@ export function Table(props: TableProps) {
                             return (
                                 <td key={column} className={css.cell}>
                                     {row['quantity'].standard + row['quantity'].foil}
+                                </td>
+                            );
+                        }
+
+                        if (column === 'value') {
+                            const standardValue = row['price']['standard'] * row['quantity']['standard'];
+                            const foilValue = row['price']['foil'] * row['quantity']['foil'];
+
+                            return (
+                                <td key={column} className={css.cell}>
+                                    {'£' + (standardValue + foilValue).toFixed(2)}
                                 </td>
                             );
                         }

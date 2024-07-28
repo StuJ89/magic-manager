@@ -19,7 +19,10 @@ export default function Page() {
 
     return (
         <PageLayout title='View Collection'>
-            <Table data={cards} columns={['name', 'manaCost', 'cardType', 'subTypes', 'set', 'rarity', 'quantity']} />
+            <Table
+                data={cards}
+                columns={['name', 'manaCost', 'cardType', 'subTypes', 'set', 'rarity', 'keywords', 'quantity', 'value']}
+            />
         </PageLayout>
     );
 }

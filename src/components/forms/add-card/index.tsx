@@ -28,6 +28,8 @@ export function AddCardForm() {
         const power = formData.get('power') as string;
         const toughness = formData.get('toughness') as string;
         const image = formData.get('image') as string;
+        const standardPrice = formData.get('standardPrice') as string;
+        const foilPrice = formData.get('foilPrice') as string;
 
         const formatArray = (value: string): string[] => {
             if (!value) {
@@ -50,7 +52,12 @@ export function AddCardForm() {
             keywords: formatArray(keywords),
             power: parseInt(power) ?? null,
             toughness: parseInt(toughness) ?? null,
-            image: image ?? null
+            image: image ?? null,
+            price: {
+                standard: parseFloat(standardPrice) ?? null,
+                foil: parseFloat(foilPrice) ?? null,
+                lastUpdated: new Date()
+            }
         });
 
         if (!result) {
@@ -73,6 +80,8 @@ export function AddCardForm() {
             <TextInput name='power' label='Power' />
             <TextInput name='toughness' label='Toughness' />
             <TextInput name='image' label='Image URL' />
+            <TextInput name='standardPrice' label='Standard Price (£)' />
+            <TextInput name='foilPrice' label='Foil Price (£)' />
         </Form>
     );
 }

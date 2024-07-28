@@ -18,6 +18,11 @@ export type Card = {
     power: number | null;
     toughness: number | null;
     image: string | null;
+    price: {
+        standard: number | null;
+        foil: number | null;
+        lastUpdated: Date;
+    };
 };
 
 export async function createCard(data: WithoutId<Card>): Promise<{ success: boolean }> {
