@@ -1,10 +1,10 @@
 'use server';
 
 import { getDatabaseCollection } from 'app/server/database';
-import { WithoutId } from 'mongodb';
+import { ObjectId, WithoutId } from 'mongodb';
 
 export type Deck = {
-    _id: string;
+    _id: string | ObjectId;
     name: string;
     colours: string[];
     keywords: string[];
@@ -42,7 +42,7 @@ export async function readDecksCollection(): Promise<Deck[]> {
 
 export async function readDeck(id: string): Promise<Deck | null> {
     const collection = await getDatabaseCollection<Deck>('decks');
-    const document = await collection.findOne({ _id: id });
+    const document = await collection.findOne({ _id: new ObjectId(id) });
 
     if (!document) {
         return null;
