@@ -8,6 +8,11 @@ export type Deck = {
     name: string;
     colours: string[];
     keywords: string[];
+    record: {
+        wins: number;
+        losses: number;
+    };
+    active: boolean;
 };
 
 export async function createDeck(data: WithoutId<Deck>): Promise<{ success: boolean }> {
@@ -51,4 +56,15 @@ export async function readDeck(id: string): Promise<Deck | null> {
     document._id = document._id.toString();
 
     return document;
+}
+
+export async function readActiveDecks(): Promise<Deck[]> {
+    const collection = await getDatabaseCollection<Deck>('decks');
+    const documents = await collection.find({ active: true }).sort({ name: 'asc' }).toArray();
+
+    documents.forEach((document) => {
+        document._id = document._id.toString();
+    });
+
+    return documents;
 }

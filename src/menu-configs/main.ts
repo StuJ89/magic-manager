@@ -10,5 +10,11 @@ export const mainMenuOptions = [
         link: '/decks',
         icon: 'decks',
         type: 'blue'
+    },
+    {
+        name: 'Tournaments',
+        link: '/tournaments',
+        icon: 'tournaments',
+        type: 'black'
     }
 ];

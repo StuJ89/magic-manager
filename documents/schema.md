@@ -42,13 +42,59 @@ type Set = {
 
 type Deck = {
     name: string; // Kors
-    colours: string; // ['White']
-    collection: string; // collection ID
+    colours: string[]; // ['W']
+    keywords: string[]; // ['Kor', 'Equipment']
+    record: {
+        wins: number;
+        losses: number;
+    }
+    active: boolean;
 }
 
 type DeckCard = {
     card: string; // Card ID
     deck: string; // Deck ID
     quantity: number; // 4
+}
+
+type Tournament = {
+    name: string; // MTG Champions League
+    numberOfDecks: number; // 64
+    format: string; // League | Knockout | Group and Knockout
+    leagueSize: number | null;
+    groupSize: number | null;
+    winner: string | null; // Kors | null
+    startDate: Date;
+    endDate: Date | null;
+    currentStage: string; // group
+}
+
+type TournamentDeck = {
+    name: string; // Kors
+    deckId: string; // deck ID
+    tournament: string; // tournament ID
+    group: string | null;
+    league: string | null;
+    record: {
+        wins: number;
+        losses: number;
+        finalPosition: string | null; // 2nd | Quarter Finals | 3rd in Group | etc.
+    }
+}
+
+type TournamentGame = {
+    tournament: string; // tournament ID
+    tournamentName: string; // MTG Champions League
+    tournamentStage: string; // Group Game | Semi Finals | etc.
+    deckOne: {
+        id: string;
+        name: string;
+        isWinner: boolean;
+    },
+    deckTwo: {
+        id: string;
+        name: string;
+        isWinner: boolean;
+    }
 }
 ```

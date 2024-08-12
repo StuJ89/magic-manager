@@ -19,7 +19,13 @@ export function AddDeckForm() {
         const colours = formData.getAll('colours') as string[];
         const keywords = formData.get('keywords') as string;
 
-        const { success } = await createDeck({ name, colours, keywords: keywords.split(',') });
+        const { success } = await createDeck({
+            name,
+            colours,
+            keywords: keywords.split(','),
+            record: { wins: 0, losses: 0 },
+            active: true
+        });
 
         if (!success) {
             return;
