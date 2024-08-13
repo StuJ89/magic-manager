@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { readTournament, Tournament } from 'app/server/actions/database/tournaments';
-import { TournamentSetup } from 'app/components/interfaces/tournament-setup';
+import { TournamentSetup } from 'app/components/dashboards/tournament-setup';
 import PageLayout from 'app/layouts/page';
 
 type TournamentPageProps = {

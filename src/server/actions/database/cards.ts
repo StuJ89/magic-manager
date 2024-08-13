@@ -4,7 +4,7 @@ import { getDatabaseCollection } from 'app/server/database';
 import { ObjectId, WithoutId } from 'mongodb';
 
 export type Card = {
-    _id: string;
+    _id: string | ObjectId;
     name: string;
     colours: string[];
     manaCost: string;
@@ -45,7 +45,7 @@ export async function createCard(data: WithoutId<Card>): Promise<{ success: bool
 
 export async function readCard(id: string): Promise<Card | null> {
     const collection = await getDatabaseCollection<Card>('cards');
-    const document = await collection.findOne(new ObjectId(id));
+    const document = await collection.findOne({ _id: new ObjectId(id) });
 
     return document;
 }
@@ -64,16 +64,16 @@ export async function readCardCollection(): Promise<Card[]> {
 export async function updateCard(id: string, data: Card): Promise<Card | null> {
     const collection = await getDatabaseCollection<Card>('cards');
 
-    await collection.updateOne(new ObjectId(id), data);
+    await collection.updateOne({ _id: new ObjectId(id) }, data);
 
-    const result = await collection.findOne(new ObjectId(id));
+    const result = await collection.findOne({ _id: new ObjectId(id) });
 
     return result;
 }
 
 export async function deleteCard(id: string): Promise<boolean> {
     const collection = await getDatabaseCollection<Card>('cards');
-    const result = await collection.deleteOne(new ObjectId(id));
+    const result = await collection.deleteOne({ _id: new ObjectId(id) });
 
     return result.deletedCount > 0;
 }

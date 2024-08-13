@@ -1,0 +1,30 @@
+.root {
+    width: 70%;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-size: 28px;
+}
+
+.addButton {
+    width: 120px;
+    font-size: 20px;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    text-wrap: nowrap;
+}
+
+.addButton:hover {
+    cursor: pointer;
+}

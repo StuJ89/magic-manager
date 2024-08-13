@@ -27,9 +27,10 @@ export function AddCollectionCardForm(props: AddCollectionCardFormProps) {
     async function handleSubmit(formData: FormData) {
         const standardQuantity = formData.get('standardQuantity') as string;
         const foilQuantity = formData.get('foilQuantity') as string;
+        const inDecksQuantity: number = props.collectionCard !== null ? props.collectionCard.quantity.inDecks : 0;
 
         const card = { ...props.card } as unknown as WithoutId<Card> & { _id?: string; cardId: string };
-        card.cardId = props.card._id;
+        card.cardId = props.card._id as string;
         delete card._id;
 
         const data = {
@@ -37,7 +38,9 @@ export function AddCollectionCardForm(props: AddCollectionCardFormProps) {
             ...card,
             quantity: {
                 standard: parseInt(standardQuantity),
-                foil: parseInt(foilQuantity)
+                foil: parseInt(foilQuantity),
+                total: parseInt(standardQuantity) + parseInt(foilQuantity),
+                inDecks: inDecksQuantity
             }
         };
 

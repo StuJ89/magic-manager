@@ -11,6 +11,8 @@ export type CollectionCard = WithoutId<Card> & {
     quantity: {
         standard: number;
         foil: number;
+        total: number;
+        inDecks: number;
     };
 };
 
@@ -33,7 +35,6 @@ export async function createCollectionCard(data: WithoutId<CollectionCard>): Pro
 }
 
 export async function readCollectionCard(collectionId: string, cardId: string): Promise<CollectionCard | null> {
-    console.log(collectionId, cardId);
     const collection = await getDatabaseCollection<CollectionCard>('collection-cards');
     const document = await collection.findOne({
         collection: collectionId,

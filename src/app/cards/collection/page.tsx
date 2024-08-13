@@ -15,13 +15,22 @@ export default function Page() {
         readCollectionCards(store.collection).then((cards) => setCards(cards));
     }, [store.collection]);
 
-    console.log(cards);
-
     return (
         <PageLayout title='View Collection'>
             <Table
                 data={cards}
-                columns={['name', 'manaCost', 'cardType', 'subTypes', 'set', 'rarity', 'keywords', 'quantity', 'value']}
+                columns={[
+                    'name',
+                    'manaCost',
+                    'cardType',
+                    'subTypes',
+                    'set',
+                    'rarity',
+                    'keywords',
+                    'quantity',
+                    'inDecks',
+                    'value'
+                ]}
             />
         </PageLayout>
     );

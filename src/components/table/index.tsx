@@ -140,7 +140,15 @@ export function Table(props: TableProps) {
                         if (column === 'quantity') {
                             return (
                                 <td key={column} className={css.cell}>
-                                    {row['quantity'].standard + row['quantity'].foil}
+                                    {row['quantity'].total}
+                                </td>
+                            );
+                        }
+
+                        if (column === 'inDecks') {
+                            return (
+                                <td key={column} className={css.cell}>
+                                    {row['quantity'].inDecks}
                                 </td>
                             );
                         }
