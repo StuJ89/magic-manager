@@ -3,7 +3,7 @@
 import { getDatabaseCollection } from 'app/server/database';
 import { ObjectId, WithoutId } from 'mongodb';
 
-type Tournament = {
+export type Tournament = {
     _id: string | ObjectId;
     name: string;
     numberOfDecks: number;
@@ -17,7 +17,7 @@ type Tournament = {
     currentStage: string | null;
 };
 
-type TournamentDeck = {
+export type TournamentDeck = {
     _id: string | ObjectId;
     name: string;
     deckId: string;
@@ -31,7 +31,7 @@ type TournamentDeck = {
     };
 };
 
-type TournamentGame = {
+export type TournamentGame = {
     _id: string | ObjectId;
     tournament: string;
     tournamentName: string;
@@ -65,4 +65,19 @@ export async function createTournament(data: WithoutId<Tournament>): Promise<Tou
     result._id = result._id.toString();
 
     return result;
+}
+
+export async function readTournament(id: string): Promise<Tournament | null> {
+    const collection = await getDatabaseCollection<Tournament>('tournaments');
+    const document = await collection.findOne({
+        _id: new ObjectId(id)
+    });
+
+    if (!document) {
+        return null;
+    }
+
+    document._id = document._id.toString();
+
+    return document;
 }
