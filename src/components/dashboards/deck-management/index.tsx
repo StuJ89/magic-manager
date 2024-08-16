@@ -1,20 +1,17 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 import { Deck } from 'app/server/actions/database/decks';
-import { DeckCard, readDeckCards } from 'app/server/actions/database/deck-cards';
-
-import { Table } from 'app/components/table';
+import { DeckCardCategory, DeckCards, readDeckCards } from 'app/server/actions/database/deck-cards';
+import { DeckCategory } from './components/deck-category';
 
 import css from './index.module.css';
-import { CollectionCard, readCollectionCard } from 'app/server/actions/database/collection-cards';
-import { sessionStore } from 'app/stores';
 
 type DeckManagementProps = {
     deck: Deck;
 };
 
 export function DeckManagement(props: DeckManagementProps) {
-    const [deckCards, setDeckCards] = useState<DeckCard[]>([]);
+    const [deckCards, setDeckCards] = useState<DeckCards>([]);
 
     useEffect(() => {
         readDeckCards(props.deck._id as string).then((response) => {
@@ -22,14 +19,38 @@ export function DeckManagement(props: DeckManagementProps) {
         });
     }, [props.deck._id]);
 
-    console.log(deckCards);
+    const renderDeckCategories = (): ReactElement | null => {
+        if (deckCards.length === 0) {
+            return null;
+        }
+
+        const categories = deckCards.filter((category) => {
+            return category.cards.length > 0;
+        });
+
+        if (categories.length === 0) {
+            return null;
+        }
+
+        return (
+            <div>
+                {categories.map((category: DeckCardCategory) => {
+                    return (
+                        <div key={category.type}>
+                            <DeckCategory name={category.name} cards={category.cards} />
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    };
 
     return (
         <div className={css.root}>
             <div className={css.header}>
                 <p className={css.title}>{props.deck.name}</p>
             </div>
-            <Table data={deckCards} columns={[]} />
+            {renderDeckCategories()}
         </div>
     );
 }
