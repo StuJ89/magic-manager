@@ -10,5 +10,6 @@
     "singleQuote": true,
     "tabWidth": 4,
     "trailingComma": "none",
-    "useTabs": false
+    "useTabs": false,
+    "plugins": ["@nomemo/nice-import-sorting"]
 }

@@ -1,11 +1,14 @@
 'use client';
 
-import { CollectionCard } from 'app/server/actions/database/collection-cards';
-import css from './index.module.css';
-import Image from 'next/image';
 import { Form } from 'app/components/form-elements/form';
 import { NumberInput } from 'app/components/form-elements/input-number';
+
+import { CollectionCard } from 'app/server/actions/database/collection-cards';
 import { DeckCard } from 'app/server/actions/database/deck-cards';
+
+import Image from 'next/image';
+
+import css from './index.module.css';
 
 type AddCardToDeckFormProps = {
     collectionCard: CollectionCard | null;
