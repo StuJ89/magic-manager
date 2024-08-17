@@ -50,12 +50,12 @@
 }
 
 .cell {
+    padding: 4px 16px 6px 16px;
     max-width: 300px;
     text-transform: capitalize;
-    padding: 8px 24px 12px 24px;
-    text-align: left;
     font-size: 18px;
     text-align: center;
+    line-height: 30px;
 }
 
 .manaContainer {

@@ -1,5 +1,7 @@
 .root {
+    background-color: var(--background-color-lighter);
     width: 70%;
+    padding: 24px;
 }
 
 .header {
@@ -10,17 +12,25 @@
 
 .title {
     font-size: 28px;
+    line-height: 28px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
 }
 
 .addButton {
-    width: 120px;
+    padding: 2px 16px;
     font-size: 20px;
     font-family: inherit;
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 5px;
     border: none;
-    background-color: transparent;
+    border-radius: 5px;
+    background-color: var(--primary-color);
     color: white;
     text-wrap: nowrap;
 }

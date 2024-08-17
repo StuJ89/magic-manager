@@ -6,6 +6,7 @@ import { WhiteManaSymbol } from 'app/icons/mana-symbols/white';
 import { BlackManaSymbol } from 'app/icons/mana-symbols/black';
 import { GreenManaSymbol } from 'app/icons/mana-symbols/green';
 import { ObjectId } from 'mongodb';
+import { ManaSymbols } from '../table-elements/mana-symbols';
 
 type TableData = {
     _id: string | ObjectId;
@@ -38,43 +39,16 @@ export function Table(props: TableProps) {
                         if (column === 'colours') {
                             return (
                                 <td key={column} className={css.cell}>
-                                    <div className={css.manaContainer}>
-                                        {row['colours'].map((colour: string) => {
-                                            let manaSymbol = null;
-
-                                            if (colour === 'W') {
-                                                manaSymbol = <WhiteManaSymbol />;
-                                            }
-                                            if (colour === 'U') {
-                                                manaSymbol = <BlueManaSymbol />;
-                                            }
-                                            if (colour === 'B') {
-                                                manaSymbol = <BlackManaSymbol />;
-                                            }
-                                            if (colour === 'R') {
-                                                manaSymbol = <RedManaSymbol />;
-                                            }
-                                            if (colour === 'G') {
-                                                manaSymbol = <GreenManaSymbol />;
-                                            }
-
-                                            return (
-                                                <div key={colour} className={css.manaSymbol}>
-                                                    {manaSymbol}
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
+                                    <ManaSymbols manaElements={row['colours']} />
                                 </td>
                             );
                         }
 
                         if (column === 'manaCost') {
-                            const manaElements = row['manaCost'].split('');
-
                             return (
                                 <td key={column} className={css.cell}>
-                                    <div className={css.manaContainer}>
+                                    <ManaSymbols manaElements={row['manaCost'].split('')} />
+                                    {/* <div className={css.manaContainer}>
                                         {manaElements.map((mana: string, index: number) => {
                                             let manaSymbol = null;
 
@@ -108,7 +82,7 @@ export function Table(props: TableProps) {
                                                 </div>
                                             );
                                         })}
-                                    </div>
+                                    </div> */}
                                 </td>
                             );
                         }

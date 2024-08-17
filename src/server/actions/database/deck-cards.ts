@@ -1,6 +1,6 @@
 'use server';
 
-import { ObjectId, WithoutId } from 'mongodb';
+import { ObjectId } from 'mongodb';
 import { getDatabaseCollection } from 'app/server/database';
 import { CollectionCard } from './collection-cards';
 
@@ -22,6 +22,20 @@ export type DeckCardCategory = {
 };
 
 export type DeckCards = DeckCardCategory[];
+
+export async function readDeckCard(deckId: string, collectionCardId: string): Promise<DeckCard | null> {
+    const collection = await getDatabaseCollection<DeckCard>('deck-cards');
+    const document = await collection.findOne({ 'deck': deckId, 'card._id': new ObjectId(collectionCardId) });
+
+    if (!document) {
+        return null;
+    }
+
+    document._id = document._id.toString();
+    document.card._id = document.card._id.toString();
+
+    return document;
+}
 
 export async function readDeckCards(deckId: string): Promise<DeckCards> {
     const collection = await getDatabaseCollection<DeckCard>('deck-cards');

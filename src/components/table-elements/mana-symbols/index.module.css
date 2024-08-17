@@ -1,0 +1,25 @@
+.manaContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 3px;
+}
+
+.manaNumber {
+    color: black;
+    height: 25px;
+    width: 25px;
+    border-radius: 100%;
+    background-color: rgb(171, 163, 163);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 30px;
+    text-shadow: 0px 0px 1px black;
+}
+
+.manaSymbol {
+    height: 25px;
+    width: 25px;
+}

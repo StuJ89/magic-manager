@@ -1,0 +1,11 @@
+.title {
+    font-size: 22px;
+}
+
+.card {
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
