@@ -6,6 +6,7 @@ type NumberInputProps = {
     name: string;
     label: string;
     value: number;
+    upperLimit?: number; 
 };
 
 export function NumberInput(props: NumberInputProps) {
@@ -15,6 +16,10 @@ export function NumberInput(props: NumberInputProps) {
         const input = event.target.valueAsNumber;
 
         if (event.target.value === '' || input < 0) {
+            return;
+        }
+
+        if (props.upperLimit !== undefined && input > props.upperLimit) {
             return;
         }
 

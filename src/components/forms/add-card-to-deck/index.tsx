@@ -4,7 +4,7 @@ import { Form } from 'app/components/form-elements/form';
 import { NumberInput } from 'app/components/form-elements/input-number';
 
 import { CollectionCard } from 'app/server/actions/database/collection-cards';
-import { DeckCard } from 'app/server/actions/database/deck-cards';
+import { createDeckCard, DeckCard, DeckCardQuantity } from 'app/server/actions/database/deck-cards';
 
 import Image from 'next/image';
 
@@ -13,11 +13,31 @@ import css from './index.module.css';
 type AddCardToDeckFormProps = {
     collectionCard: CollectionCard | null;
     deckCard: DeckCard | null;
+    deckId: string;
 };
 
 export function AddCardToDeckForm(props: AddCardToDeckFormProps) {
-    const handleSubmit = () => {
-        console.log('huh');
+    async function handleSubmit(formData: FormData) {
+        const standardQuantity = formData.get('standardQuantity') as string;
+        const foilQuantity = formData.get('foilQuantity') as string;
+        const totalQuantity = parseInt(standardQuantity) + parseInt(foilQuantity);
+
+        const quantity: DeckCardQuantity = {
+            standard: parseInt(standardQuantity),
+            foil: parseInt(foilQuantity),
+            total: totalQuantity
+        }
+
+        if (props.collectionCard === null) {
+            return;
+        }
+
+        if (props.deckCard === null) {
+            createDeckCard(props.deckId, props.collectionCard, quantity);
+        }
+
+        // Replace with table reload
+        window.location.reload();
     };
 
     const imageElement = () => {
@@ -36,6 +56,10 @@ export function AddCardToDeckForm(props: AddCardToDeckFormProps) {
         return null;
     };
 
+    if (props.collectionCard === null) {
+        return null;
+    }
+
     return (
         <div className={css.root}>
             {imageElement()}
@@ -45,11 +69,13 @@ export function AddCardToDeckForm(props: AddCardToDeckFormProps) {
                         label='Standard Quantity'
                         name='standardQuantity'
                         value={props.deckCard?.deckCardQuantity.standard ?? 0}
+                        upperLimit={props.collectionCard.quantity.standard - props.collectionCard.quantity.standardInDecks}
                     />
                     <NumberInput
                         label='Foil Quantity'
                         name='foilQuantity'
                         value={props.deckCard?.deckCardQuantity.foil ?? 0}
+                        upperLimit={props.collectionCard.quantity.foil - props.collectionCard.quantity.foilInDecks}
                     />
                 </Form>
             </div>

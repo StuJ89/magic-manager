@@ -48,41 +48,6 @@ export function Table(props: TableProps) {
                             return (
                                 <td key={column} className={css.cell}>
                                     <ManaSymbols manaElements={row['manaCost'].split('')} />
-                                    {/* <div className={css.manaContainer}>
-                                        {manaElements.map((mana: string, index: number) => {
-                                            let manaSymbol = null;
-
-                                            if (typeof parseInt(mana) === 'number') {
-                                                manaSymbol = <div className={css.manaNumber}>{mana}</div>;
-                                            }
-
-                                            if (mana === 'X') {
-                                                manaSymbol = 'X';
-                                            }
-
-                                            if (mana === 'W') {
-                                                manaSymbol = <WhiteManaSymbol />;
-                                            }
-                                            if (mana === 'U') {
-                                                manaSymbol = <BlueManaSymbol />;
-                                            }
-                                            if (mana === 'B') {
-                                                manaSymbol = <BlackManaSymbol />;
-                                            }
-                                            if (mana === 'R') {
-                                                manaSymbol = <RedManaSymbol />;
-                                            }
-                                            if (mana === 'G') {
-                                                manaSymbol = <GreenManaSymbol />;
-                                            }
-
-                                            return (
-                                                <div key={index} className={css.manaSymbol}>
-                                                    {manaSymbol}
-                                                </div>
-                                            );
-                                        })}
-                                    </div> */}
                                 </td>
                             );
                         }
@@ -122,7 +87,7 @@ export function Table(props: TableProps) {
                         if (column === 'inDecks') {
                             return (
                                 <td key={column} className={css.cell}>
-                                    {row['quantity'].inDecks}
+                                    {row['quantity'].totalInDecks}
                                 </td>
                             );
                         }

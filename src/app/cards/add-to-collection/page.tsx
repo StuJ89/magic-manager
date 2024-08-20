@@ -53,6 +53,7 @@ export default function Page() {
     const onClose = () => {
         setShowDialog(false);
         setSelectedCard(null);
+        setCollectionCard(null);
     };
 
     const dialogTitle = () => {

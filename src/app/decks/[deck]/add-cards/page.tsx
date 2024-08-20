@@ -80,7 +80,7 @@ export default function Page(props: AddCardToDeckProps) {
                 onClick={handleClick}
             />
             <Dialog title='Add to Deck' visible={showDialog} onClose={handleClose}>
-                <AddCardToDeckForm collectionCard={selectedCard} deckCard={deckCard} />
+                <AddCardToDeckForm collectionCard={selectedCard} deckCard={deckCard} deckId={props.params.deck}/>
             </Dialog>
         </PageLayout>
     );

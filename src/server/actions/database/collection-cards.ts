@@ -12,7 +12,9 @@ export type CollectionCard = WithoutId<Card> & {
         standard: number;
         foil: number;
         total: number;
-        inDecks: number;
+        standardInDecks: number;
+        foilInDecks: number;
+        totalInDecks: number;
     };
 };
 

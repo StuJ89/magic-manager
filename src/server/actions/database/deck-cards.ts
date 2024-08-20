@@ -1,18 +1,13 @@
 'use server';
 
-import { ObjectId } from 'mongodb';
+import { ObjectId, WithoutId } from 'mongodb';
 import { getDatabaseCollection } from 'app/server/database';
-import { CollectionCard } from './collection-cards';
-
+import { CollectionCard, updateCollectionCard } from './collection-cards';
 export type DeckCard = {
     _id: string | ObjectId;
     readonly deck: string;
     readonly card: CollectionCard;
-    readonly deckCardQuantity: {
-        standard: number;
-        foil: number;
-        total: number;
-    };
+    readonly deckCardQuantity: DeckCardQuantity;
 };
 
 export type DeckCardCategory = {
@@ -23,9 +18,39 @@ export type DeckCardCategory = {
 
 export type DeckCards = DeckCardCategory[];
 
+export type DeckCardQuantity = {
+    standard: number,
+    foil: number,
+    total: number
+}
+
+export async function createDeckCard(deckId: string, collectionCard: CollectionCard, quantity: DeckCardQuantity): Promise<{ success: boolean }> {
+    const collection = await getDatabaseCollection<DeckCard>('deck-cards');
+    const document: WithoutId<DeckCard> = {
+        deck: deckId,
+        card: collectionCard,
+        deckCardQuantity: quantity
+    }
+
+    await collection.insertOne(document as DeckCard);
+
+    const updatedCollectionCard = { ...collectionCard } as WithoutId<CollectionCard> & { _id?: string };
+    delete updatedCollectionCard._id;
+
+    updatedCollectionCard.quantity.standardInDecks += quantity.standard;
+    updatedCollectionCard.quantity.foilInDecks += quantity.foil;
+    updatedCollectionCard.quantity.totalInDecks += quantity.total;
+
+    updateCollectionCard(collectionCard._id as string, updatedCollectionCard);
+
+    return {
+        success: true
+    };
+}
+
 export async function readDeckCard(deckId: string, collectionCardId: string): Promise<DeckCard | null> {
     const collection = await getDatabaseCollection<DeckCard>('deck-cards');
-    const document = await collection.findOne({ 'deck': deckId, 'card._id': new ObjectId(collectionCardId) });
+    const document = await collection.findOne({ 'deck': deckId, 'card._id': collectionCardId });
 
     if (!document) {
         return null;
